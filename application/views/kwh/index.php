@@ -14,7 +14,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <title>Grafik kWh</title>
+    <title>Grafik Cost</title>
   </head>
   <body>
     <div class="container vertical-center">
@@ -26,7 +26,8 @@
           <div class="container d-flex h-100 flex-column">
             <div class="flex-grow-1"></div>
             <div class="row justify-content-center">
-              <div class="col text-center mt-2"> 
+              <div class="col text-center mt-2">
+                <img class="mb-3" src="https://demo.pm-meter.com/assets/img/ALI-60051.png" style="height:128px; width:128px" alt=""><br> 
                 <b>Lihat Data Berdasarkan : </b>
                 <div class="dropdown d-inline">
                   <select name="options" id="options">
@@ -35,57 +36,60 @@
                     <option value="2"> Bulan</option>
                   </select>
               
-                  <!-- Form filter tanggal -->
-                  <form action="<?php echo base_url('kwh/perTanggal') ?>" method="GET" class="mt-2" id="1" style="display:none">
-                    <div class="input-group mb-3">
-                      <select name="device" class="form-control">
-                      <?php 
-                        foreach($device as $row)
-                        { 
-                          echo '<option value="'.$row->dev.'">'.$row->dev. ' - ' .$row->dev_loc.'</option>';
-                        }
-                      ?>
-                      </select>
-                      <input type="date" class="form-control" name="tanggal">
-                      <div class="input-group-append">
-                        <button type="submit" class="btn btn-primary">Cari <i class="fas fa-luv"></i></button>
-                      </div>
-                    </div>
-                  </form>
-
-                  <!-- Form filter bulan -->
-                  <form action="<?php echo base_url('kwh/perBulan') ?>" method="GET" class="mt-2" id="2" style="display:none">
-                    <div class="input-group mb-3">
-                      <select name="device" class="form-control">
+                  <div class="container">
+                    <!-- Form filter tanggal -->
+                    <form action="<?php echo base_url('kwh/perTanggal') ?>" method="GET" class="mt-2" id="1" style="display:none">
+                      <div class="input-group mb-3">
+                        <select name="device" class="form-control">
                         <?php 
                           foreach($device as $row)
                           { 
                             echo '<option value="'.$row->dev.'">'.$row->dev. ' - ' .$row->dev_loc.'</option>';
                           }
                         ?>
-                      </select>
-                      <select name="bulan" class="form-control">
-                        <?php
-                          $bulan=array("January","February","March","April","May","June","July","August","September","October","November","December");
-                          $jum_bln=count($bulan);
-                          for($c=0; $c<$jum_bln; $c+=1){
-                              echo"<option value=$bulan[$c]> $bulan[$c] </option>";
-                          }
-                        ?>
-                      </select> 
-                      <?php
-                        $now=date('Y');
-                        echo "<select name='tahun' class='form-control' name='tahun' id='tahun'>";
-                        for ($a=2019;$a<=$now;$a++){
-                            echo "<option value='$a'>$a</option>";
-                        }
-                        echo "</select>";
-                      ?>
-                      <div class="input-group-append">
-                        <button type="submit" class="btn btn-primary">Cari <i class="fas fa-luv"></i></button>
+                        </select>
+                        <input type="date" class="form-control" name="tanggal">
+                        <div class="input-group-append">
+                          <button type="submit" class="btn btn-primary">Cari <i class="fas fa-luv"></i></button>
+                        </div>
                       </div>
-                    </div>
-                  </form>
+                    </form>
+
+                    <!-- Form filter bulan -->
+                    <form action="<?php echo base_url('kwh/perBulan') ?>" method="GET" class="mt-2" id="2" style="display:none">
+                      <div class="input-group mb-3">
+                        <select name="device" class="form-control">
+                          <?php 
+                            foreach($device as $row)
+                            { 
+                              echo '<option value="'.$row->dev.'">'.$row->dev. ' - ' .$row->dev_loc.'</option>';
+                            }
+                          ?>
+                        </select>
+                        <select name="bulan" class="form-control">
+                          <?php
+                            $bulan=array("January","February","March","April","May","June","July","August","September","October","November","December");
+                            $jum_bln=count($bulan);
+                            for($c=0; $c<$jum_bln; $c+=1){
+                                echo"<option value=$bulan[$c]> $bulan[$c] </option>";
+                            }
+                          ?>
+                        </select> 
+                        <?php
+                          $now=date('Y');
+                          echo "<select name='tahun' class='form-control' name='tahun' id='tahun'>";
+                          for ($a=2019;$a<=$now;$a++){
+                              echo "<option value='$a'>$a</option>";
+                          }
+                          echo "</select>";
+                        ?>
+                        <div class="input-group-append">
+                          <button type="submit" class="btn btn-primary">Cari <i class="fas fa-luv"></i></button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -113,5 +117,6 @@
           document.getElementById(this.value).style.display = 'block';
       };
     </script>
+    
   </body>
 </html>
